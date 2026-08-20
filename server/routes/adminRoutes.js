@@ -1,0 +1,20 @@
+const express = require('express');
+const router = express.Router();
+const {
+  getAdminStats,
+  getAllOrders,
+  updateOrderStatus,
+  getAllUsers,
+  updateUserRole,
+  deleteUser
+} = require('../controllers/adminController');
+const { protect, admin } = require('../middleware/authMiddleware');
+
+router.get('/stats', protect, admin, getAdminStats);
+router.get('/orders', protect, admin, getAllOrders);
+router.put('/orders/:id/status', protect, admin, updateOrderStatus);
+router.get('/users', protect, admin, getAllUsers);
+router.put('/users/:id/role', protect, admin, updateUserRole);
+router.delete('/users/:id', protect, admin, deleteUser);
+
+module.exports = router;
